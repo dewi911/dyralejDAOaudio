@@ -1,0 +1,275 @@
+﻿<Window x:Class="dyralejDAOaudio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dyralejDAOaudio"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:wpfsvl="clr-namespace:WPFSoundVisualizationLib;assembly=WPFSoundVisualizationLib"
+        xmlns:naudio="clr-namespace:NAudio.Wave;assembly=NAudio"
+
+        Title="dyralejDAOaudio" Height="600" Width="420">
+
+
+    <Window.Resources>
+     
+        <BitmapImage x:Key="Image1" UriSource="imags\pause-button.png"/>
+        <BitmapImage x:Key="Image2" UriSource="imags\play-button.png"/>
+        <BitmapImage x:Key="Image3" UriSource="imags\plain-square.png"/>
+        <BitmapImage x:Key="Image4" UriSource="imags\fast-backward-button.png"/>
+        <BitmapImage x:Key="Image5" UriSource="imags\fast-forward-button.png"/>
+        <BitmapImage x:Key="Image6" UriSource="imags\speaker.png"/>
+        <BitmapImage x:Key="Image7" UriSource="imags\clockwise-rotation.png"/>
+        <BitmapImage x:Key="Image8" UriSource="imags\abstract-016.png"/>
+        <BitmapImage x:Key="Image9" UriSource="imags\save.png"/>
+        <BitmapImage x:Key="Image10" UriSource="imags\amplitude.png"/>
+        
+
+    </Window.Resources>
+
+
+    <Grid Background="#A6A300" Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="247*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="386*"/>
+                <ColumnDefinition Width="35*"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="border" Margin="0,0,0,5" Background="#FFFC73"  Padding="30" CornerRadius="22" Height="1680" Width="405" HorizontalAlignment="Right" Grid.ColumnSpan="2">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+
+                </Border.Effect>
+            </Border>
+
+            <ListBox x:Name="songsListBox"
+    MouseDoubleClick="SongsListBox_MouseDoubleClick" Margin="0,139,10,10" Width="391" HorizontalAlignment="Right" Grid.ColumnSpan="2"/>
+            <StackPanel x:Name="constantAudioOptions" Height="27" Width="401" Margin="0,70,0,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.ColumnSpan="2">
+
+
+                
+                <Button x:Name="backwardAudioButton" Content="-" Width="45" Click="BackwardButton_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image4}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+
+                <Button x:Name="StopAudioButton" Content="Stop" Width="45" Click="StopAudioButton_Click" IsEnabled="True" Height="25" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image3}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                
+                <Button x:Name="playAudoisec" Content="Playsec" Width="45" Click="PlayAudio_Click_sec" IsEnabled="True" Height="25" Background="#60016D" Foreground="#FF281C1C" HorizontalAlignment="Left"   VerticalAlignment="Top">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image2}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Button x:Name="pauseAudioButton" Content="Pause" Width="45" Click="PauseAudio_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image1}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Button x:Name="forwardAudioButton" Content="back" Width="45" Click="ForwardButton_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image5}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+
+                <Button x:Name="echoAudioButton" Content="Echo" Width="45" Click="ApplyEchoButton_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D"/>
+
+                <Button x:Name="repeatAudioButton" Content="back" Width="45" Click="repeatButton_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image7}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+
+
+            </StackPanel>
+            <StackPanel x:Name="constantAudioOptions_audiotime" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="391" Margin="0,15,10,0" Orientation="Horizontal" Grid.ColumnSpan="2">
+                <Button x:Name="toRendering" Content="few" VerticalAlignment="Center" Width="45" Height="25" Click="renderingopenButton_Click" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" HorizontalAlignment="Left" Background="#60016D" BorderThickness="0,0,0,1">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image8}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Label x:Name="currentlyPlayingLabel" Content="" Height="22" VerticalAlignment="Top" Width="255" HorizontalContentAlignment="Right" />
+
+                <Label x:Name="currentTimeLabel" Content=" 00:00" Height="28" VerticalAlignment="Top" Width="45" HorizontalContentAlignment="Right" />
+                <Label x:Name="durationLabel" Content="/ 00:00" Width="46" HorizontalContentAlignment="Right" />
+
+
+            </StackPanel>
+            <StackPanel x:Name="constantAudioOptionsaudoitrack" VerticalAlignment="Top" Height="89" Width="401" Margin="0,45,5,0" HorizontalAlignment="Right" Grid.ColumnSpan="2">
+                <Slider x:Name="songSlider" Minimum="0" Maximum="100" 
+                    ValueChanged="SongSlider_ValueChanged"
+                    PreviewMouseLeftButtonUp="SongSlider_DragCompleted"
+                    PreviewMouseLeftButtonDown="SongSlider_DragStarted" Width="386" HorizontalAlignment="Left" Margin="9,0,9,0"/>
+            </StackPanel>
+            <StackPanel Margin="0,109,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="391" Height="25" Grid.ColumnSpan="2">
+                <Button x:Name="addNewdaudio" Content="" Width="50" Click="addSongButton_Click" IsEnabled="True" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"  Background="#60016D">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Image Source="{StaticResource Image10}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <wpfsvl:SpectrumAnalyzer Name="spectrumAnalyzer" Height="100"/>
+
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Column="0"  x:Name="contentContainer"  Background="#A3A500" Height="980" Width="{Binding Mode=OneWay, Source={StaticResource Primary600}}" Margin="2,0,410,5" Grid.RowSpan="2">
+
+            <Border Background="#FFFC73"  Padding="30" CornerRadius="22">
+                <Button x:Name="convertmp4" Content="convert" Click="convertmp4_Click" IsEnabled="True" Height="25" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#FF4A036F" Margin="0,0,247,0"/>
+                
+            
+            </Border>
+
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+
+
+            </StackPanel>
+
+            <StackPanel Margin="20,62,176,20" HorizontalAlignment="Left">
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                     <wpfsvl:DigitalClock
+                         x:Name="clockDisplay"
+                         ShowHours="False"
+                               HorizontalAlignment="Left"
+                         ShowSubSeconds="True" Height="31" Width="119"/>
+
+                    <wpfsvl:AlbumArtDisplay Name="albumArtPanel" HorizontalAlignment="Left"  Margin="5,0,5,5" Width="35" Height="35"/>
+                    <TextBlock x:Name="InfoTextBlock" RenderTransformOrigin="0.5,0.5" Width="731" Height="80">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+
+
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+
+                </StackPanel>
+                
+
+
+                 <TextBlock x:Name="InfoTextBlock1" RenderTransformOrigin="0.5,0.5" Width="731" Height="80">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+
+
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+                <Grid Grid.Row="252"
+                    Grid.ColumnSpan="35" Margin="-15,-92,-175,-205" Grid.RowSpan="500">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <wpfsvl:WaveformTimeline x:Name="waveformTimeline"
+                    Margin="5"
+                    BorderThickness="1" />
+                    <StackPanel Orientation="Vertical"
+                         VerticalAlignment="Center"
+                         Grid.Column="1">
+                        <wpfsvl:TimeEditor Margin="5"
+                  Name="repeatStartTimeEdit"
+                  IsReadOnly="True" />
+                        <wpfsvl:TimeEditor Margin="5"
+                  Name="repeatStopTimeEdit"
+                  IsReadOnly="True" />
+                    </StackPanel>
+                </Grid>
+
+
+                <Grid>
+                    <TextBox VerticalAlignment="Center"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="-15,135,5,5"
+                                        IsReadOnly="True"
+                                        Name="FileText" />
+
+                    <StackPanel HorizontalAlignment="Left"
+                                    Orientation="Horizontal"
+                                    Grid.Column="1" VerticalAlignment="Top" Margin="-10,250,0,0">
+                        <Button x:Name="browseAudioRendering" Content="browse" Width="90" Click="browseRenderingaudio_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D"/>
+
+                        <Button x:Name="playAudioRendering" Content="play" Width="90" Click="playRenderingaudio_Click" IsEnabled="False" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D"/>
+
+                        <Button x:Name="pauseAudioRendering" Content="pause" Width="90" Click="pauseRenderingaudio_Click" IsEnabled="False" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D"/>
+
+                        <Button x:Name="stopAudioRendering" Content="stop" Width="90" Click="stopRenderingaudio_Click" IsEnabled="False" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D"/>
+
+
+                    </StackPanel>
+                    
+                    <TextBox VerticalAlignment="Center"
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    Margin="-15,300,5,5"
+                    IsReadOnly="True"
+                    Name="FileTextSAVE" />
+
+                    <StackPanel HorizontalAlignment="Right"
+                 Orientation="Horizontal"
+                 Grid.Column="1" VerticalAlignment="Top" Margin="0,300,-300,0" Width="300">
+                        <Button x:Name="browsesaveAudioRendering" Content="foldersav" Width="90" Click="browsesaveRenderingaudio_Click" IsEnabled="True" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                            
+                        </Button>
+
+                        <Button x:Name="saveAudioRendering" Content="save" Width="45" Click="saveRenderingaudio_Click" IsEnabled="False" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Background="#60016D">
+                            <Button.ContentTemplate>
+                                <DataTemplate>
+                                    <Image Source="{StaticResource Image8}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </Button.ContentTemplate>
+                        </Button>
+
+
+                    </StackPanel>
+                </Grid>
+
+
+            </StackPanel>
+
+
+
+
+
+        </Grid>
+
+
+
+
+
+
+    </Grid>
+</Window>
